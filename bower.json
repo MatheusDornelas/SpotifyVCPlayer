@@ -1,0 +1,24 @@
+{
+  "name": "SpotifyVCPlayer",
+  "description": "An annyang-powered AngularJS application that plays Spotify tracks",
+  "main": "server.js",
+  "authors": [
+    "vcps@cin.ufpe.br",
+    "mdr@cin.ufpe.br"
+  ],
+  "license": "BSD-2-Clause",
+  "keywords": [
+    "spotify",
+    "annyang",
+    "vcs",
+    "voice",
+    "player"
+  ],
+  "homepage": "https://github.com/ViniciusCPSouza/SpotifyVCPlayer",
+  "private": true,
+  "dependencies": {
+    "angular": "^1.5.7",
+    "angular-route": "^1.5.7",
+    "bootstrap": "^3.3.6"
+  }
+}
