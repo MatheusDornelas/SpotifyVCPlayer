@@ -25,7 +25,7 @@
 				<dt class="col-md-6 command">Play &lt;song&gt; by &lt;artist&gt;</dt>
 				<dd class="col-md-6 command-description">Search Spotify for the given song by the given artist and then play it.</dd>
 
-				<dt class="col-md-6 command">Pause</dt>
+				<dt class="col-md-6 command">Stop</dt>
 				<dd class="col-md-6 command-description">Pause the current song.</dd>
 
 				<dt class="col-md-6 command">Resume</dt>
@@ -33,6 +33,20 @@
 
 			</dl>
 			
+		</div>
+
+	</div>
+
+	<div ng-if="show_music_player" class="player">
+		
+		<img ng-src="{{song_info.album_img}}" class="song-album-img" width="200px" height="200px" />
+
+		<div class="song-info">
+			
+			<div class="song-name" ng-bind="song_info.name">Song: </div>
+			<div class="song-artist" ng-bind="song_info.artist">Artist: </div>
+			<div class="song-album" ng-bind="song_info.album_name">Album: </div>
+
 		</div>
 
 	</div>

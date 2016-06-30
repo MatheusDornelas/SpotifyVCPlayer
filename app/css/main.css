@@ -46,3 +46,51 @@ body
     white-space: normal;
     width: 200px; 
 }
+
+.player
+{
+	width: 600px;
+
+	display: flex;
+  	flex-direction: row;
+  	justify-content: space-between;
+
+  	background-color: #23CF5F;
+
+  	border-radius: 5px;
+  	border-width: 1px;
+  	border-style: solid;
+  	border-color: #23CF5F;
+
+  	padding: 8px 6px;
+  	margin-left: auto;
+  	margin-right: 0;
+}
+
+.song-info
+{
+	width: 360px;
+
+	border-radius: 5px;
+  	border-width: 1px;
+  	border-style: solid;
+  	border-color: #fff;
+
+  	display: flex;
+  	flex-direction: column;
+  	align-items: flex-start;
+
+  	font-family: "PT Sans", Helvetica;
+
+  	background-color: #fff;
+  	opacity: 0.9;
+
+  	padding: 5px;
+}
+
+.song-name, .song-artist, .song-album
+{
+	font-size: 18px;
+	font-weight: bold;
+	color: #000;
+}

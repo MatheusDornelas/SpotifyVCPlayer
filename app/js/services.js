@@ -53,12 +53,10 @@ services.service("AudioService", function($rootScope, $http)
   {
     if (song_data)
     {
-      console.info("Playing '" + song_data["name"] + "'");
-      console.info("By '" + song_data["artists"][0]["name"] + "'");
-      console.info("Album:  '" + song_data["album"]["name"] + "'");
-
       self.audio.src = song_data["preview_url"];
       self.audio.play();
+
+      $rootScope.$broadcast("songDataChanged", song_data);
     }
   }
 
