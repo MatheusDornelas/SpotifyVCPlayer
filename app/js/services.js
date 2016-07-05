@@ -4,14 +4,23 @@ var services = angular.module("Services", []);
 
 services.service("SpotifyService", function($rootScope, $q, $http)
 {
-  this.search_songs = function(song, artist)
+  this.search_songs = function(specs)
   {
-    var query = song;
-    var track;
+    var query = "";
+    var track = null;
 
-    if (artist)
+    // add song name info, if any is present
+    if ("song" in specs)
     {
-      query += " artist:" + artist;
+      query += specs["song"];
+    }
+
+    for (var key in specs)
+    {
+      if (key != "song")
+      {
+        query += " " + key + ":" + specs[key];
+      }
     }
 
     return $http({
@@ -77,9 +86,29 @@ services.service("VoiceService", function($rootScope, SpotifyService, AudioServi
 {
   self = this;
 
-  this._search_songs = function(song, artist)
+  this._search_songs_by_genre = function(genre)
   {
-    SpotifyService.search_songs(song, artist).then(function(track)
+    return self._search_songs({"genre": genre});
+  }
+
+  this._search_songs_by_artist = function(artist)
+  {
+    return self._search_songs({"artist": artist});
+  }
+
+  this._search_songs_by_name = function(song)
+  {
+    return self._search_songs({"song": song});
+  }
+
+  this._search_songs_by_name_and_artist = function(song, artist)
+  {
+    return self._search_songs({"song": song, "artist": artist});
+  }
+
+  this._search_songs = function(specs)
+  {
+    SpotifyService.search_songs(specs).then(function(track)
     {
       AudioService.play(track);
     });
@@ -91,9 +120,12 @@ services.service("VoiceService", function($rootScope, SpotifyService, AudioServi
   {
     if (annyang)
     {
-      var commands = {
-        "play *song by *artist": self._search_songs,
-        "play *song": self._search_songs,
+      var commands =
+      {
+        "play some *genre": self._search_songs_by_genre,
+        "play a song by *artist": self._search_songs_by_artist,
+        "play *song by *artist": self._search_songs_by_name_and_artist,
+        "play *song": self._search_songs_by_name,
         "stop": AudioService.stop,
         "resume": AudioService.resume,
       }
