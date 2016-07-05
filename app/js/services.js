@@ -4,14 +4,23 @@ var services = angular.module("Services", []);
 
 services.service("SpotifyService", function($rootScope, $q, $http)
 {
-  this.search_songs = function(song, artist)
+  this.search_songs = function(specs)
   {
-    var query = song;
-    var track;
+    var query = "";
+    var track = null;
 
-    if (artist)
+    // add song name info, if any is present
+    if ("song" in specs)
     {
-      query += " artist:" + artist;
+      query += specs["song"];
+    }
+
+    for (var key in specs)
+    {
+      if (key != "song")
+      {
+        query += " " + key + ":" + specs[key];
+      }
     }
 
     return $http({
@@ -40,6 +49,71 @@ services.service("SpotifyService", function($rootScope, $q, $http)
                 .then(function()
                 {
                   return $q.when(track);
+                });
+  }
+
+  this.search_artists = function(name)
+  {
+    var artist = null;
+
+    return $http({
+                  method : "GET",
+                  url : "https://api.spotify.com/v1/search/",
+                  params: {q: name, type: "artist"}
+                 })
+                .then(function(response)
+                {
+                  if (response.data.artists.items.length)
+                  {
+                    // TODO: show all tracks, and let the user decide
+                    artist = response.data.artists.items[0];
+                  }
+                  else
+                  {
+                    // TODO: Notify empty search
+                    console.error("Search returned no results.");
+                  }
+                },
+                function(error)
+                {
+                  // TODO: Handle error!
+                  console.error("Could not retrieve data from the Spotify API");
+                })
+                .then(function()
+                {
+                  return $q.when(artist);
+                });
+  }
+
+  this.search_similar_artists = function(artist_id)
+  {
+    var artists = null;
+
+    return $http({
+                  method : "GET",
+                  url : "https://api.spotify.com/v1/artists/" + artist_id +  "/related-artists/",
+                 })
+                .then(function(response)
+                {
+                  if (response.data.artists.length)
+                  {
+                    // TODO: show all tracks, and let the user decide
+                    artists = response.data.artists;
+                  }
+                  else
+                  {
+                    // TODO: Notify empty search
+                    console.error("Search returned no results.");
+                  }
+                },
+                function(error)
+                {
+                  // TODO: Handle error!
+                  console.error("Could not retrieve data from the Spotify API");
+                })
+                .then(function()
+                {
+                  return $q.when(artists);
                 });
   }
 });
@@ -77,9 +151,43 @@ services.service("VoiceService", function($rootScope, SpotifyService, AudioServi
 {
   self = this;
 
-  this._search_songs = function(song, artist)
+  this._search_songs_by_genre = function(genre)
   {
-    SpotifyService.search_songs(song, artist).then(function(track)
+    return self._search_songs({"genre": genre});
+  }
+
+  this._search_songs_by_artist = function(artist)
+  {
+    return self._search_songs({"artist": artist});
+  }
+
+  this._search_songs_by_name = function(song)
+  {
+    return self._search_songs({"song": song});
+  }
+
+  this._search_songs_by_name_and_artist = function(song, artist)
+  {
+    return self._search_songs({"song": song, "artist": artist});
+  }
+
+  this._search_artists_by_name = function(artist)
+  {
+    SpotifyService.search_artists(artist).then(function(artist_info)
+    {
+      SpotifyService.search_similar_artists(artist_info["id"]).then(function(artists)
+      {
+        SpotifyService.search_songs({"artist": artists[0]["name"]}).then(function(track)
+        {
+          AudioService.play(track);
+        });
+      });
+    });
+  }
+
+  this._search_songs = function(specs)
+  {
+    SpotifyService.search_songs(specs).then(function(track)
     {
       AudioService.play(track);
     });
@@ -91,9 +199,13 @@ services.service("VoiceService", function($rootScope, SpotifyService, AudioServi
   {
     if (annyang)
     {
-      var commands = {
-        "play *song by *artist": self._search_songs,
-        "play *song": self._search_songs,
+      var commands =
+      {
+        "play some *genre": self._search_songs_by_genre,
+        "play something like *artist": self._search_artists_by_name,
+        "play a song by *artist": self._search_songs_by_artist,
+        "play *song by *artist": self._search_songs_by_name_and_artist,
+        "play *song": self._search_songs_by_name,
         "stop": AudioService.stop,
         "resume": AudioService.resume,
       }
