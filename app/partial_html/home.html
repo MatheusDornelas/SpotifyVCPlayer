@@ -45,6 +45,21 @@
 		</div>
 
 	</div>
+	<div class="panel-heading">Similar songs</div>
+
+		<div class="panel-body">
+
+			<dl class="dl-horizontal-2">
+
+				<dt class="col-md-6 command" ng-bind="similar_song_info.name"></dt>
+				<dt class="col-md-6 command" ng-bind="similar_song_info.artist"></dt>
+				<dt class="col-md-6 command" ng-bind="similar_song_info.album_name"></dt>
+
+			</dl>
+			
+		</div>
+
+	</div>
 
 	<div ng-if="show_music_player" class="player">
 		

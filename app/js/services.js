@@ -33,7 +33,7 @@ services.service("SpotifyService", function($rootScope, $q, $http)
                   if (response.data.tracks.items.length)
                   {
                     // TODO: show all tracks, and let the user decide
-                    track = response.data.tracks.items[0];
+                    track = response.data.tracks.items;
                   }
                   else
                   {
@@ -127,7 +127,7 @@ services.service("AudioService", function($rootScope, $http)
   {
     if (song_data)
     {
-      self.audio.src = song_data["preview_url"];
+      self.audio.src = song_data[0]["preview_url"];
       self.audio.play();
 
       $rootScope.$broadcast("songDataChanged", song_data);
@@ -221,6 +221,7 @@ services.service("VoiceService", function($rootScope, SpotifyService, AudioServi
 
       // Render KITT's interface
       SpeechKITT.vroom();
+
   }
   else
   {
