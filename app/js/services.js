@@ -222,6 +222,7 @@ services.service("VoiceService", function($rootScope, SpotifyService, AudioServi
       // Render KITT's interface
       SpeechKITT.vroom();
 
+      //self._search_songs_by_name('Hello');
   }
   else
   {

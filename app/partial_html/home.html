@@ -45,22 +45,17 @@
 		</div>
 
 	</div>
-	<div class="panel-heading">Similar songs</div>
-
-		<div class="panel-body">
-
-			<dl class="dl-horizontal-2">
-
-				<dt class="col-md-6 command" ng-bind="similar_song_info.name"></dt>
-				<dt class="col-md-6 command" ng-bind="similar_song_info.artist"></dt>
-				<dt class="col-md-6 command" ng-bind="similar_song_info.album_name"></dt>
-
-			</dl>
-			
+	<div class="panel commands-panel">
+		<div class="panel-heading">Similar songs</div>
+			<div class="panel-body" ng-repeat="item in similar_song_array">
+				<dl class="dl-horizontal-2">
+					<dt class="col-md-6 command" ng-bind="item.name"></dt>
+					<dt class="col-md-6 command" ng-bind="item.artist"></dt>
+					<dt class="col-md-6 command" ng-bind="item.album_name"></dt>
+				</dl>
+			</div>
 		</div>
-
 	</div>
-
 	<div ng-if="show_music_player" class="player">
 		
 		<img ng-src="{{song_info.album_img}}" class="song-album-img" width="200px" height="200px" />
