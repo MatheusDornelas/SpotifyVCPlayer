@@ -47,11 +47,11 @@
 	</div>
 	<div class="panel commands-panel">
 		<div class="panel-heading">Similar songs</div>
-			<div class="panel-body" ng-repeat="item in similar_song_array">
-				<dl class="dl-horizontal-2">
-					<dt class="col-md-6 command" ng-bind="item.name"></dt>
-					<dt class="col-md-6 command" ng-bind="item.artist"></dt>
-					<dt class="col-md-6 command" ng-bind="item.album_name"></dt>
+			<div class="dl-horizontal-2 panel" ng-repeat="item in similar_song_array">
+				<dl>
+					<dt class="col-md-6 command" ng-bind="'Song:  ' + item.name"></dt>
+					<dt class="col-md-6 command" ng-bind="'Artist:  ' + item.artists[0].name"></dt>
+					<dt class="col-md-6 command" ng-bind="'Album: ' + item.album.name"></dt>
 				</dl>
 			</div>
 		</div>

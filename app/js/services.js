@@ -122,6 +122,7 @@ services.service("AudioService", function($rootScope, $http)
 {
   var self = this;
   this.audio = new Audio();
+  var arraySongs = null;
 
   this.play = function(song_data)
   {
@@ -129,7 +130,7 @@ services.service("AudioService", function($rootScope, $http)
     {
       self.audio.src = song_data[0]["preview_url"];
       self.audio.play();
-
+      arraySongs = song_data;
       $rootScope.$broadcast("songDataChanged", song_data);
     }
   }
@@ -144,6 +145,13 @@ services.service("AudioService", function($rootScope, $http)
   {
     console.info("Resuming song...");
     self.audio.play();
+  }
+
+  this.next = function()
+  {
+    console.info("Next song...");
+    console.log(arraySongs)
+    self.audio.play(arraySongs.slice(1,arraySongs.length));
   }
 });
 
@@ -193,8 +201,6 @@ services.service("VoiceService", function($rootScope, SpotifyService, AudioServi
     });
   }
 
-  this._resume_song
-
   this.startup = function()
   {
     if (annyang)
@@ -208,6 +214,7 @@ services.service("VoiceService", function($rootScope, SpotifyService, AudioServi
         "play *song": self._search_songs_by_name,
         "stop": AudioService.stop,
         "resume": AudioService.resume,
+        "next" : AudioService.next
       }
 
       // Add commands to annyang
@@ -222,7 +229,7 @@ services.service("VoiceService", function($rootScope, SpotifyService, AudioServi
       // Render KITT's interface
       SpeechKITT.vroom();
 
-      //self._search_songs_by_name('Hello');
+      self._search_songs_by_name('Hello');
   }
   else
   {

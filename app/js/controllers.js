@@ -19,7 +19,8 @@ controllers.controller("HomeCtrl", function($rootScope, $scope, VoiceService)
       $scope.song_info.album_name = "Album: " + song_info[0]["album"]["name"];
       $scope.song_info.album_img = song_info[0]["album"]["images"][1]["url"];
 
-      $scope.similar_song_array = song_info;
+      console.log(song_info.slice(1,11))
+      $scope.similar_song_array = song_info.slice(1,11);
 
 
     });
