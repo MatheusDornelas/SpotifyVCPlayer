@@ -1,0 +1,18 @@
+{
+	"preset": "airbnb",
+	"requireCurlyBraces": true,
+	"fix": true,
+	"disallowMixedSpacesAndTabs": true,
+	"disallowMultipleLineBreaks": true,
+	"disallowPaddingNewLinesBeforeLineComments": false,
+	"disallowSemicolons": false,
+	"disallowTabs": false,
+	"disallowPaddingNewLinesInObjects": false,
+	"requireNewlineBeforeBlockStatements": false,
+	"disallowNewlineBeforeBlockStatements": true,
+	"disallowSpacesInFunctionExpression": {
+		"beforeOpeningRoundBrace": true,
+		"beforeOpeningCurlyBrace": true
+	},
+	"disallowPaddingNewLinesBeforeLineComments": false
+}
