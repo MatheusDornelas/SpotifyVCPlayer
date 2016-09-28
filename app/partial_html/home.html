@@ -46,15 +46,27 @@
 
 	</div>
 
+	<div class="panel panel-heading">Similar Songs</div>
+
+	<div ng-repeat="song in all_songs">
+		<div class="similiar-song">
+			<div class="similar-song-name">{{song.name}}</div>
+			<!--div class="similar-song-artist">{{song.artist}}</div>
+			<div class="similar-song-album">{{song.album}}</div>
+			<div class="similar-song-duration">{{song.duration}}</div-->
+		</div>
+		
+	</div>
+
 	<div ng-if="show_music_player" class="player">
 		
-		<img ng-src="{{song_info.album_img}}" class="song-album-img" width="200px" height="200px" />
+		<img ng-src="{{song_info[0].album_img}}" class="song-album-img" width="200px" height="200px" />
 
 		<div class="song-info">
 			
-			<div class="song-name" ng-bind="song_info.name">Song: </div>
-			<div class="song-artist" ng-bind="song_info.artist">Artist: </div>
-			<div class="song-album" ng-bind="song_info.album_name">Album: </div>
+			<div class="song-name" ng-bind="all_songs[0].name">Song: </div>
+			<div class="song-artist" ng-bind="all_songs[0].artist">Artist: </div>
+			<div class="song-album" ng-bind="all_songs[0].album_name">Album: </div>
 
 		</div>
 

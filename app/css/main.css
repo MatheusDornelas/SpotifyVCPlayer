@@ -72,20 +72,20 @@ body
 	width: 360px;
 
 	border-radius: 5px;
-  	border-width: 1px;
-  	border-style: solid;
-  	border-color: #fff;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #fff;
 
-  	display: flex;
-  	flex-direction: column;
-  	align-items: flex-start;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
 
-  	font-family: "PT Sans", Helvetica;
+	font-family: "PT Sans", Helvetica;
 
-  	background-color: #fff;
-  	opacity: 0.9;
+	background-color: #fff;
+	opacity: 0.9;
 
-  	padding: 5px;
+	padding: 5px;
 }
 
 .song-name, .song-artist, .song-album
@@ -93,4 +93,22 @@ body
 	font-size: 18px;
 	font-weight: bold;
 	color: #000;
+}
+
+.similar-song-name
+{
+  height: 40px;
+  margin-right: auto;
+  margin-bottom: 1px;
+  background-color: #ff0000;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #000000;
+}
+
+.similar-song-name, .similar-song-artist, .similar-song-album
+{
+  font-size: 12px;
+  font-weight: italic;
+  color: #000; 
 }

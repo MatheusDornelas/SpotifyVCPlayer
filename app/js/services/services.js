@@ -6,7 +6,7 @@ services.service('SpotifyService', function ($rootScope, $q, $http){
 	this.search_songs = function (specs){
 		var query = '';
 		var track = null;
-
+		
 		// add song name info, if any is present
 		if ('song' in specs) {
 			query += specs['song'];
@@ -25,7 +25,7 @@ services.service('SpotifyService', function ($rootScope, $q, $http){
 		}).then(function (response){
 			if (response.data.tracks.items.length) {
 				// TODO: show all tracks, and let the user decide
-				track = response.data.tracks.items[0];
+				track = response.data.tracks.items;
 			} else {
 				// TODO: Notify empty search
 				console.error('Search returned no results.');
@@ -123,7 +123,7 @@ services.service('VoiceService', function ($rootScope, SpotifyService, AudioServ
 	};
 
 	this._search_songs_by_name = function (song){
-		return self._search_songs({ song: song, });
+		return self._search_songs({ song: song });
 	};
 
 	this._search_songs_by_name_and_artist = function (song, artist){
