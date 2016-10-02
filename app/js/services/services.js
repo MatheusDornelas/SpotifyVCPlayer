@@ -25,7 +25,7 @@ services.service('SpotifyService', function ($rootScope, $q, $http){
 		}).then(function (response){
 			if (response.data.tracks.items.length) {
 				// TODO: show all tracks, and let the user decide
-				track = response.data.tracks.items;
+				track = response.data.tracks.items.slice(0,6);
 			} else {
 				// TODO: Notify empty search
 				console.error('Search returned no results.');
@@ -115,6 +115,7 @@ services.service('VoiceService', function ($rootScope, SpotifyService, AudioServ
 	self = this;
 
 	this._search_songs_by_genre = function (genre){
+
 		return self._search_songs({ genre: genre, });
 	};
 
@@ -123,6 +124,7 @@ services.service('VoiceService', function ($rootScope, SpotifyService, AudioServ
 	};
 
 	this._search_songs_by_name = function (song){
+		
 		return self._search_songs({ song: song });
 	};
 
@@ -172,6 +174,10 @@ services.service('VoiceService', function ($rootScope, SpotifyService, AudioServ
 
 			// Render KITT's interface
 			SpeechKITT.vroom();
+
+			this._search_songs_by_name('hello');
+
+
 		} else {
 			console.error('The \'annyang\' object was not found!');
 		}

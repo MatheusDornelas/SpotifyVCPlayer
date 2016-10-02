@@ -49,22 +49,23 @@ body
 
 .player
 {
-	width: 600px;
+	width: 45%;
+  float: right;
 
 	display: flex;
-  	flex-direction: row;
-  	justify-content: space-between;
+	flex-direction: row;
+	justify-content: space-between;
 
-  	background-color: #23CF5F;
+	background-color: #23CF5F;
 
-  	border-radius: 5px;
-  	border-width: 1px;
-  	border-style: solid;
-  	border-color: #23CF5F;
+	border-radius: 5px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #23CF5F;
 
-  	padding: 8px 6px;
-  	margin-left: auto;
-  	margin-right: 0;
+	padding: 8px 6px;
+  margin-left: auto;
+  margin-right: 0px;
 }
 
 .song-info
@@ -95,7 +96,7 @@ body
 	color: #000;
 }
 
-.similar-song-name
+.similar-song
 {
   height: 40px;
   margin-right: auto;
@@ -106,9 +107,23 @@ body
   border-color: #000000;
 }
 
-.similar-song-name, .similar-song-artist, .similar-song-album
+.similar-song-artist, .similar-song-album
 {
   font-size: 12px;
   font-weight: italic;
   color: #000; 
+}
+
+.similar-song-name
+{
+  padding-top: 2px;
+  padding-left: 8px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.similar-song-and-player
+{
+  width: 45%;
+  float:left;
 }

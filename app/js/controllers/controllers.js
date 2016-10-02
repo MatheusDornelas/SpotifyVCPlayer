@@ -14,7 +14,7 @@ controllers.controller('HomeCtrl', function ($rootScope, $scope, VoiceService) {
 		var formattedSongs = [];
 		
 		song_info.forEach(function(song){
-			console.log('song', song.name)
+
 			formattedSongs.push({
 				name : song.name,
 				artist : song.artists[0].name,
@@ -23,6 +23,7 @@ controllers.controller('HomeCtrl', function ($rootScope, $scope, VoiceService) {
 			});
 		});
 		
+
 		//$scope.song_info.name = 'Song: ' + song_info[0]['name'];
 		//$scope.song_info.artist = 'Artist: ' + song_info[0]['artists'][0]['name'];
 		//$scope.song_info.album_name = 'Album: ' + song_info[0]['album']['name'];
