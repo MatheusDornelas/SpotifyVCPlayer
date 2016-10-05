@@ -1,8 +1,8 @@
 'use strict';
 
-var controllers = angular.module('Controllers', ['Services']);
+var controllers = angular.module('Controllers', []);
 
-controllers.controller('HomeCtrl', function ($rootScope, $scope, VoiceService) {
+controllers.controller('HomeCtrl', ['VoiceService', function ($rootScope, $scope, VoiceService) {
 	$scope.show_music_player = false;
 
 	VoiceService.startup();
@@ -33,4 +33,4 @@ controllers.controller('HomeCtrl', function ($rootScope, $scope, VoiceService) {
 
 
 	});
-});
+}]);
