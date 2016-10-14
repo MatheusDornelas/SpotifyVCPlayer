@@ -1,10 +1,10 @@
-var voiceService = angular.module('VoiceService', []).service('VoiceService', ['SpotifyService', 'AudioService', function ($rootScope, SpotifyService, AudioService){
+services.service('VoiceService', ['$rootScope', 'SpotifyService', 'AudioService', function ($rootScope, SpotifyService, AudioService){
 
 	self = this;
 
 	this._search_songs_by_genre = function (genre){
 
-		return self._search_songs({ genre: genre, });
+		return self._search_songs({ genre: genre });
 	};
 
 	this._search_songs_by_artist = function (artist){
@@ -24,7 +24,7 @@ var voiceService = angular.module('VoiceService', []).service('VoiceService', ['
 		SpotifyService.search_artists(artist).then(function (artist_info){
 			SpotifyService.search_similar_artists(artist_info['id']).then(function (artists){
 				SpotifyService.search_songs({ artist: artists[0]['name'], }).then(function (track){
-					AudioService.play(track);
+					AudioService.play(track[0]);
 				});
 			});
 		});
@@ -32,7 +32,7 @@ var voiceService = angular.module('VoiceService', []).service('VoiceService', ['
 
 	this._search_songs = function (specs){
 		SpotifyService.search_songs(specs).then(function (track){
-			AudioService.play(track);
+			AudioService.play(track[0]);
 		});
 	};
 
@@ -64,7 +64,6 @@ var voiceService = angular.module('VoiceService', []).service('VoiceService', ['
 			SpeechKITT.vroom();
 
 			this._search_songs_by_name('hello');
-
 
 		} else {
 			console.error('The \'annyang\' object was not found!');

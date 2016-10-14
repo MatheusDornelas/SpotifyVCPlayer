@@ -1,8 +1,4 @@
-'use strict';
-
-var controllers = angular.module('Controllers', []);
-
-controllers.controller('HomeCtrl', ['VoiceService', function ($rootScope, $scope, VoiceService) {
+controllers.controller('HomeCtrl', function ($rootScope, $scope, VoiceService) {
 	$scope.show_music_player = false;
 
 	VoiceService.startup();
@@ -23,7 +19,6 @@ controllers.controller('HomeCtrl', ['VoiceService', function ($rootScope, $scope
 			});
 		});
 		
-
 		//$scope.song_info.name = 'Song: ' + song_info[0]['name'];
 		//$scope.song_info.artist = 'Artist: ' + song_info[0]['artists'][0]['name'];
 		//$scope.song_info.album_name = 'Album: ' + song_info[0]['album']['name'];
@@ -33,4 +28,4 @@ controllers.controller('HomeCtrl', ['VoiceService', function ($rootScope, $scope
 
 
 	});
-}]);
+});

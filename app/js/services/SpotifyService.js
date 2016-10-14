@@ -1,4 +1,4 @@
-var spotifyServices = angular.module('SpotifyServices', []).service('SpotifyService', function ($rootScope, $q, $http){
+services.service('SpotifyService', function ($rootScope, $q, $http){
 	this.search_songs = function (specs){
 		var query = '';
 		var track = null;
@@ -22,6 +22,8 @@ var spotifyServices = angular.module('SpotifyServices', []).service('SpotifyServ
 			if (response.data.tracks.items.length) {
 				// TODO: show all tracks, and let the user decide
 				track = response.data.tracks.items.slice(0,6);
+
+				$rootScope.$broadcast('songDataChanged', track);
 			} else {
 				// TODO: Notify empty search
 				console.error('Search returned no results.');
